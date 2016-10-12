@@ -24,7 +24,7 @@ def get_parameters():
 	opts, args = optp.parse_args()
 	if opts.help:
 		usage()
- 
+
 	if opts.gameId is not None:
 		gameId = opts.gameId
  
@@ -48,6 +48,8 @@ if __name__ == '__main__':
 		contentBytes = page.read()
 		#進行分割
 		soup = BeautifulSoup(str(contentBytes), "html.parser")
+		Game_Name = soup.find_all("div", { "class" : "apphub_AppName" })
+		print("Game : "+Game_Name[0].string)
 		matches = soup.find_all("div", { "class" : "game_purchase_price" })
 		#將資訊顯示出來
-		print(matches[0].string);
+		print("Price : "+matches[0].string)
